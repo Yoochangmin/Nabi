@@ -1,192 +1,182 @@
 <template>
   <div>
-    <!--    <div class="main-container">-->
-    <!--      <form action="" method="post" class="search-container">-->
-    <!--        <span>기업 검색</span>-->
-    <!--        <input class="search-txt" type="text" placeholder="검색어를 입력해 주세요">-->
-    <!--        <span class="search-btn"><font-awesome-icon icon="fa-solid fa-magnifying-glass"/></span>-->
-    <!--      </form>-->
-    <!--    </div>-->
-    <!--    <div>-->
+    <Header></Header>
+    <div class="main-container">
+      <form action="" method="post" class="search-container">
+        <div>기업 검색</div>
+        <input class="search-txt" type="text" placeholder="검색어를 입력해 주세요">
+        <div class="search-btn">
+          <font-awesome-icon icon="fa-solid fa-magnifying-glass"/>
+        </div>
+      </form>
+    </div>
+    <div>
 
-    <!--      <div class="employment-list-container">-->
-    <!--        <p>채용공고 상세검색</p>-->
-    <!--        <div class="advanced-catagory-list">-->
+      <div class="employment-list-container">
+        <p>채용공고 상세검색</p>
+        <div class="advanced-catagory-list">
+          <dl class="advanced-search">
+            <dt class="advanced-catagory">직무</dt>
+            <div class="advanced-list">
+              <dd class="advanced-item"></dd>
+            </div>
+          </dl>
 
-    <!--          <dl class="advanced-search">-->
-    <!--            <dt class="advanced-catagory"><p>직무</p></dt>-->
-    <!--            <dd class="advanced-item">111111</dd>-->
-    <!--          </dl>-->
+          <dl class="advanced-search">
+            <dt class="advanced-catagory"><p>근무지역</p></dt>
+            <div class="advanced-list">
+              <dd class="advanced-item"></dd>
+            </div>
+          </dl>
 
-    <!--          <dl class="advanced-search">-->
-    <!--            <dt class="advanced-catagory"><p>근무지역</p></dt>-->
-    <!--            <dd class="advanced-item">111111</dd>-->
-    <!--          </dl>-->
+          <dl class="advanced-search">
+            <dt class="advanced-catagory"><p>경력</p></dt>
+            <div class="advanced-list">
+              <dd class="advanced-item"></dd>
+            </div>
+          </dl>
 
-    <!--          <dl class="advanced-search">-->
-    <!--            <dt class="advanced-catagory"><p>경력</p></dt>-->
-    <!--            <dd class="advanced-item"> 22222</dd>-->
-    <!--          </dl>-->
+          <dl class="advanced-search">
+            <dt class="advanced-catagory"><p>학력</p></dt>
+            <div class="advanced-list">
+              <dd class="advanced-item"></dd>
+            </div>
+          </dl>
 
-    <!--          <dl class="advanced-search">-->
-    <!--            <dt class="advanced-catagory"><p>학력</p></dt>-->
-    <!--            <dd class="advanced-item">3333</dd>-->
-    <!--          </dl>-->
+          <dl class="advanced-search">
+            <dt class="advanced-catagory"><p>기업형태</p></dt>
+            <div class="advanced-list">
+              <dd class="advanced-item"></dd>
+            </div>
+          </dl>
 
-    <!--          <dl class="advanced-search">-->
-    <!--            <dt class="advanced-catagory"><p>기업형태</p></dt>-->
-    <!--            <dd class="advanced-item">44444</dd>-->
-    <!--          </dl>-->
-
-    <!--          <dl class="advanced-search">-->
-    <!--            <dt class="advanced-catagory"><p>고용형태</p></dt>-->
-    <!--            <dd class="advanced-item">222</dd>-->
-    <!--          </dl>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </div>-->
-    <h1 @click="test">Test page</h1>
-    <JobListPagination v-bind:listArray="jobs" />
+          <dl class="advanced-search">
+            <dt class="advanced-catagory"><p>고용형태</p></dt>
+            <div class="advanced-list">
+              <dd class="advanced-item"></dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <JobListPagination v-bind:listArray="jobs"/>
     <div class="btn-cover">
       <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
         이전
       </button>
-      <span class="page-count">{{ pageNum - 1 }} 페이지</span>
-      <button @click="nextPage" class="page-btn">다음</button>
+      <span class="page-count">{{ pageNum -1}} 페이지</span>
+      <button  @click="nextPage"   class="page-btn">
+        다음
+      </button>
     </div>
+    <Footer></Footer>
+    <div @click="test"> test</div>
   </div>
 </template>
 
 <script>
 import JobListPagination from "@/components/JobListPagination";
-import { fetchJobList, jobType } from "@/api/index";
+
+import {fetchJobList} from "@/api/index";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 export default {
-  components: { JobListPagination },
+  components: {Header,Footer, JobListPagination},
   data() {
     return {
-      jobs: {},
-      locs: [],
-      pageNum: 2,
-    };
+      jobs : {},
+      locs : [],
+      pageNum : 2,
+      bench: 0
+    }
   },
   methods: {
     test() {
-      jobType()
-        .then((response) => {
-          console.log(response.data);
-          console.log(this.pageNum);
-          this.jobs = response.data;
-        })
-        .catch((Error) => console.log(Error));
+      fetchJobList()
+          .then(response => {
+            console.log(response.data)
+            this.jobs = response.data;
+          })
+          .catch((Error) => console.log(Error))
     },
-    fetchData() {
+    fetchData(){
       fetchJobList(this.pageNum)
-        .then((response) => {
-          console.log(response.data);
-          console.log(this.pageNum);
-          this.jobs = response.data;
-        })
-        .catch((Error) => console.log(Error));
+          .then(response => {
+            console.log(this.pageNum)
+            this.jobs = response.data;
+          })
+          .catch((Error) => console.log(Error))
     },
-    nextPage() {
+    nextPage () {
       this.pageNum += 1;
       fetchJobList(this.pageNum)
-        .then((response) => {
-          this.jobs = response.data;
-        })
-        .catch((Error) => console.log(Error));
+          .then(response => {
+            this.jobs = response.data;
+          })
+          .catch((Error) => console.log(Error))
     },
-    prevPage() {
-      if (this.pageNum !== 2) {
+    prevPage () {
+      if(this.pageNum !== 2){
         this.pageNum -= 1;
-      } else {
-        this.pageNum = 2;
+      }else {
+        this.pageNum =2
       }
       fetchJobList(this.pageNum)
-        .then((response) => {
-          console.log(response.data);
-          console.log(this.pageNum);
-          this.jobs = response.data;
-        })
-        .catch((Error) => console.log(Error));
-    },
+          .then(response => {
+            this.jobs = response.data;
+          })
+          .catch((Error) => console.log(Error))
+    }
   },
 
   created() {
-    this.fetchData(this.pageNum);
-  },
-};
+    this.fetchData(this.pageNum)
+  }
+}
 </script>
 
 <style scoped>
-html {
+html{
   text-align: center;
   font-family: "JetBrains Mono Thin", sans-serif;
   color: #333;
 }
-h1 {
-  align-items: center;
-  text-align: center;
-}
-.search-container {
-  text-align: center;
-  max-width: 1200px;
+
+
+/* ------검색 부분------*/
+.search-container{
+  width: 1200px;
   margin: 0 auto;
+  display: flex;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
-.search-txt {
+
+.search-txt{
   background-color: white;
   height: 50px;
-  border-radius: 5px 0 0 5px;
-  width: 80%;
+  border-radius: 5px;
+  width: 80% ;
   padding: 20px;
-  border: solid #1e0d71 3px;
-  border-right: none;
+  border: solid #1E0D71 3px ;
+
 }
-span {
-  color: #1e0d71;
+
+.search-container div{
+  color: #1E0D71;
   font-size: 20px;
   margin-right: 20px;
+
 }
-.search-btn {
-  display: inline-block;
+.search-btn{
   height: 50px;
-  line-height: 36.2px;
-  border-radius: 0 5px 5px 0;
-  border: 3px #1e0d71 solid;
-  border-left: none;
+  width: 50px;
+  padding-top: 10px;
+  position: absolute;
+  right: 30px;
 }
-.advanced-catagory {
-  background-color: #1e0d71;
-  height: 57px;
-  color: white;
-}
-
-.advanced-catagory p {
-  padding: 10px;
-  font-size: 16px;
-}
-.advanced-item {
-  height: 30px;
-  font-size: 16px;
-  padding: 10px;
-}
-.employment-list-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  height: 250px;
-}
-.main-container {
-}
-
-.advanced-catagory-list {
-  display: flex;
-}
-.advanced-search {
-  width: 300px;
-  height: 190px;
-  overflow-y: scroll;
-}
-
 .btn-cover {
   margin-top: 1.5rem;
   text-align: center;
@@ -199,4 +189,67 @@ span {
 .btn-cover .page-count {
   padding: 0 1rem;
 }
+
+/*----------채용공고 상세검색-------- ----*/
+
+.employment-list-container{
+  width: 1200px;
+  margin: 0 auto;
+  height: 250px;
+}
+
+.advanced-catagory-list{
+  display: flex;
+  border-radius: 5px 5px 0 0;
+
+}
+
+.advanced-search {
+  width: 200px;
+  height: 190px;
+
+}
+
+.advanced-catagory{
+  background-color: #1E0D71;
+  height: 60px;
+  color: white;
+  padding-top: 20px;
+  padding-left: 10px;
+  box-sizing: border-box;
+}
+
+
+.advanced-item{
+  height: 30px;
+  width: 190px;
+
+  font-size: 16px;
+  padding: 10px;
+}
+
+
+
+
+/*--------스크롤바 CSS -----------*/
+
+
+.advanced-list{
+  overflow-y: scroll;
+  width: 200px;
+  height: 140px;
+}
+.advanced-list::-webkit-scrollbar {
+  width: 10px;
+}
+.advanced-list::-webkit-scrollbar-thumb {
+  background-color: #1E0D71;
+  border-radius: 4px;
+}
+.advanced-list::-webkit-scrollbar-track {
+  background-color: grey;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px white;
+}
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="main">
     <v-app-bar
       absolute
       color="#black"
@@ -9,44 +9,32 @@
     >
       <v-tabs centered>
         <v-tab>
-          <router-link to="/" class="nav-link"> 홈 </router-link>
+          <router-link to="/testcase" class="nav-link"> 캘린더 </router-link>
         </v-tab>
         <v-tab>
-          <router-link to="/maketeam" class="nav-link"> 취업공고 </router-link>
-        </v-tab>
-        <v-tab>
-          <router-link class="nav-link" to="/teamsearch"> 자격증 </router-link>
-        </v-tab>
-
-        <v-tab>
-          <router-link class="nav-link" to="/search">
-            <v-btn icon>
-              <v-icon>mdi-magnify </v-icon>
-              검색
-            </v-btn>
-          </router-link>
+          <router-link to="/jobList" class="nav-link"> 취업공고 </router-link>
         </v-tab>
       </v-tabs>
 
-      <div class="text-center">
-        <v-menu offset-y>
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn color="primary" dark v-bind="attrs" v-on="on">
-              <v-avatar size="24px">
-                <img
-                  alt="user"
-                  src="https://cdn.pixabay.com/photo/2020/06/24/19/12/cabbage-5337431_1280.jpg"
-                />
-              </v-avatar>
-              <span>프로필</span>
-              <v-icon>mdi-minus</v-icon>
-            </v-btn>
-          </template>
-        </v-menu>
-      </div>
+<!--      <div class="text-center">-->
+<!--        <v-menu offset-y>-->
+<!--          <template v-slot:activator="{ on, attrs }">-->
+<!--            <v-btn color="primary" dark v-bind="attrs" v-on="on">-->
+<!--              <v-avatar size="24px">-->
+<!--                <img-->
+<!--                  alt="user"-->
+<!--                  src="https://cdn.pixabay.com/photo/2020/06/24/19/12/cabbage-5337431_1280.jpg"-->
+<!--                />-->
+<!--              </v-avatar>-->
+<!--              <span>프로필</span>-->
+<!--              <v-icon>mdi-minus</v-icon>-->
+<!--            </v-btn>-->
+<!--          </template>-->
+<!--        </v-menu>-->
+<!--      </div>-->
 
       <router-link class="nav-link" to="/login">
-        <v-btn @click="LogOutMethod()"> 로그아웃 </v-btn>
+        <v-btn @click="LogOutMethod()"> 로그인 </v-btn>
       </router-link>
 
       <v-spacer></v-spacer>
@@ -58,7 +46,7 @@
 import { LogOut } from "@/api/index.js";
 
 export default {
-  name: "NavBar",
+  name: "Header",
 
   methods: {
     LogOutMethod() {
@@ -73,7 +61,7 @@ export default {
 </script>
 
 <style scoped>
-.header {
+.main {
   margin-bottom: 100px;
 }
 </style>

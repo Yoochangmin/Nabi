@@ -42,34 +42,18 @@ function DeleteSchedule(id) {
 }
 
 //수정해야댐 URL
-function fetchJobList(num) {
-  return axios.get(`http://localhost:8080/job_cd=${num}`, {
-    withCredentials: true,
-  });
-}
-function publishedJobList(num) {
-  return axios.get(`http://localhost:8080/deadline=${num}`, {
-    withCredentials: true,
-  });
-}
-function jobType() {
-  return axios.get(`http://localhost:8080/job_type=2`, {
+function fetchJobList() {
+  return axios.get(`http://ec2-3-35-253-186.ap-northeast-2.compute.amazonaws.com:8081/api/announcements/?job_cd=84`, {
     withCredentials: true,
   });
 }
 
-function patchJobList(num) {
-  return axios.patch(`http://localhost:8080/job_cd=${num}`, num + 1, {
-    withCredentials: true,
-  });
-}
+
+
 
 export {
   PostSchedule,
   GetSchedule,
   DeleteSchedule,
   fetchJobList,
-  jobType,
-  publishedJobList,
-  patchJobList,
 };
