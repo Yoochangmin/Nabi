@@ -7,6 +7,12 @@
       height="88px"
       max-height="88px"
     >
+      <v-spacer></v-spacer>
+
+      <v-toolbar-title class="logo">
+        <v-img :src="require('@/assets/navlogo.svg')"></v-img>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
       <v-tabs centered>
         <v-tab>
           <router-link to="/testcase" class="nav-link"> 캘린더 </router-link>
@@ -33,8 +39,8 @@
 <!--        </v-menu>-->
 <!--      </div>-->
 
-      <router-link class="nav-link" to="/login">
-        <v-btn @click="LogOutMethod()"> 로그인 </v-btn>
+      <router-link class="nav-link" to="/login" >
+        <v-btn @click="LogOutMethod()" class="login-icon"> 로그인 </v-btn>
       </router-link>
 
       <v-spacer></v-spacer>
@@ -63,5 +69,12 @@ export default {
 <style scoped>
 .main {
   margin-bottom: 100px;
+}
+.logo{
+  margin-left: 100px;
+}
+
+.login-icon{
+  margin-right: 100px;
 }
 </style>

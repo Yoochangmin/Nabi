@@ -11,7 +11,7 @@
               :return-value.sync="start"
               offset-y
             >
-              <template v-slot:activator="{ on }">
+              <template v-slot:a ctivator="{ on }">
                 <v-text-field
                   v-model="start"
                   dark
