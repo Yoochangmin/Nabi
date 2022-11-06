@@ -10,7 +10,8 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-title class="logo">
-        <v-img :src="require('@/assets/navlogo.svg')"></v-img>
+        <v-img :src="require('@/assets/navlogo.svg')"
+        ></v-img>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-tabs centered>
@@ -72,6 +73,7 @@ export default {
 }
 .logo{
   margin-left: 100px;
+  height: 30px;
 }
 
 .login-icon{

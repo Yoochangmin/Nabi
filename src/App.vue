@@ -15,3 +15,9 @@ export default {
   }),
 };
 </script>
+<style>
+a{
+  text-decoration-line: none;
+  link: black;
+}
+</style>
